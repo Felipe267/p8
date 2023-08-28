@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <input type="text" id="novaTarefa" placeholder="Digite uma nova tarefa">
+    <button onclick="adicionarTarefa()">Adicionar</button>
+    <ul id="listaTarefas"></ul>
+
+    <script>
+        function adicionarTarefa() {
+            var inputTarefa = document.getElementById("novaTarefa");
+            var tarefa = inputTarefa.value;
+
+            if (tarefa.trim() !== "") {
+                var lista = document.getElementById("listaTarefas");
+                var novoItem = document.createElement("li");
+                novoItem.innerHTML = `<input type="checkbox" onchange="marcarConcluida(this)"> ${tarefa} <button onclick="removerTarefa(this)">Remover</button>`;
+                lista.appendChild(novoItem);
+                inputTarefa.value = "";
+            }
+        }
+
+        function marcarConcluida(checkbox) {
+            var item = checkbox.parentNode;
+            if (checkbox.checked) {
+                item.style.textDecoration = "line-through";
+            } else {
+                item.style.textDecoration = "none";
+            }
+        }
+
+        function removerTarefa(button) {
+            var item = button.parentNode;
+            item.parentNode.removeChild(item);
+        }
+    </script>
+</body>
+</html>
